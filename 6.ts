@@ -14,7 +14,17 @@ const transformInputString = (input: string): number[][] => {
 	return result;
 };
 
+const transformInputStringPart2 = (input: string): number[] => {
+	const lines: string[] = input.trim().split("\n");
+
+	const timeNumbers = lines[0].match(/\d+/g)!.map(Number).join("");
+	const distanceNumbers = lines[1].match(/\d+/g)!.map(Number).join("");
+
+	return [Number(timeNumbers), Number(distanceNumbers)];
+};
+
 const dataArray: number[][] = transformInputString(input);
+const dataArray2: number[] = transformInputStringPart2(input);
 
 const calculateScenarioDistance = (buttonHoldTime: number, raceTime: number): number => {
     const usableRaceTime = raceTime - buttonHoldTime;
@@ -39,3 +49,4 @@ const calculateTotalScore = (dataArray: number[][]): number => {
 };
 
 console.log(calculateTotalScore(dataArray));
+console.log(calculateRaceWinningScenarios(dataArray2));
