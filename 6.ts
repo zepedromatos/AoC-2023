@@ -1,5 +1,6 @@
 import { daySixInput as input } from "./inputs";
 
+console.time("Day 6 exec time");
 const transformInputString = (input: string): number[][] => {
 	const lines: string[] = input.trim().split("\n");
 
@@ -50,3 +51,4 @@ const calculateTotalScore = (dataArray: number[][]): number => {
 
 console.log(calculateTotalScore(dataArray));
 console.log(calculateRaceWinningScenarios(dataArray2));
+console.timeEnd("Day 6 exec time");
