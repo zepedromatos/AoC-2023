@@ -114,3 +114,25 @@ for (let i = 0; i < locations.length; i++) {
 }
 
 console.log("lowest:", lowest, "seeds:", seeds.length);
+
+const part2 = (input) => {
+    const lists = input.split(/[\n]*[a-z- ]*:[ ]*/g).filter((l) => l).map((l) => l.trim().split(/[\n]+/g).map((n) => n.split(/[\n ]/).map((m) => parseInt(m, 10))));
+    const maxMap = lists[lists.length - 1].reduce((max, map) => Math.max(max, map[0] + map[2]), 0);
+    let lowestPost;
+    for (let pos = 0; pos < maxMap && isNaN(lowestPost); pos++) {
+      let val = pos;
+      for (let i = lists.length - 1; i > 0; i--) {
+        const map = lists[i].find((m) => val >= m[0] && val < m[0] + m[2]);
+        map && (val = val - map[0] + map[1]);
+      }
+      for(let i = 0; i < lists[0][0].length && isNaN(lowestPost); i += 2) {
+        if(val >= lists[0][0][i] && val < lists[0][0][i] + lists[0][0][i + 1]) {
+          lowestPost = pos
+        }
+      }
+    }
+  
+    return lowestPost;
+  };
+
+  console.log(part2(input));
